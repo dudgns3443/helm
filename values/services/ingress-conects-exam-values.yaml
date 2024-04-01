@@ -1,0 +1,167 @@
+ingress:
+  enabled: false
+  className: alb
+  annotations:
+    alb.ingress.kubernetes.io/group.name: conects
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:534420079206:certificate/cad9de2a-623f-4579-a24b-9f10004c449c,arn:aws:acm:ap-northeast-2:534420079206:certificate/6859da2f-9bee-46c2-8f37-64bfb78a5093
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/success-codes: '200,301'
+    alb.ingress.kubernetes.io/target-type: instance
+    alb.ingress.kubernetes.io/target-node-labels: Service=exam
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+  hosts:
+  - host: nomu-test.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-nomu
+          port:
+            number: 80
+  - host: nomu.dangi.co.kr
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-nomu
+          port:
+            number: 80
+  - host: hobby.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-hobby
+          port:
+            number: 80
+  - host: sobang-test.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-sobang
+          port:
+            number: 80
+  - host: sobang.dangi.co.kr
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-sobang
+          port:
+            number: 80
+  - host: bupmu-test.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-bupmu
+          port:
+            number: 80
+  - host: bupmu.dangi.co.kr
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-bupmu
+          port:
+            number: 80
+  - host: gyung-test.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-gyung
+          port:
+            number: 80
+  - host: gyung.dangi.co.kr
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-gyung
+          port:
+            number: 80
+  - host: pro.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-pro
+          port:
+            number: 80
+  - host: pro.dangi.co.kr
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-pro
+          port:
+            number: 80
+  - host: exam-test.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-exam
+          port:
+            number: 80
+  - host: cdm-test.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-cdm
+          port:
+            number: 80
+  - host: imyong-test.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-imyong
+          port:
+            number: 80
+  - host: bupgum-test.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-bupgum
+          port:
+            number: 80
+  - host: bupgum.dangi.co.kr
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-bupgum
+          port:
+            number: 80
+  - host: gong7.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-gong7
+          port:
+            number: 80

@@ -1,0 +1,11 @@
+# {{- if .Values.autoscaling.enabled  | default false}}
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   annotations:
+#   name: {{.Release.Name}}
+#   namespace: default
+# spec:
+#   type: ExternalName
+#   externalName: {{.Release.Name}}.{{.Release.Namespace}}.svc.cluster.local
+# {{- end }}

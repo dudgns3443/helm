@@ -1,0 +1,100 @@
+{{- if .Values.autoscaling.enabled  | default false}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "01-conects-gong.fullname" . }}
+  labels: 
+    {{- include "01-conects-gong.labels" . | nindent 4 }}
+spec: 
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "01-conects-gong.selectorLabels" . | nindent 6 }}
+  minReadySeconds: {{ .Values.minReadySeconds }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  strategy:
+    {{- toYaml .Values.strategy | nindent 4}}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "01-conects-gong.labels" . | nindent 8 }}
+    spec:
+      {{- with .Values.nodeSelector }}
+      nodeSelector: 
+        Service: {{ .service}}
+      {{- end }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+      - name: {{ .Release.Name }}
+        env: 
+          {{- toYaml .Values.env | nindent 10 }}
+          - name: DD_SERVICE_MAPPING
+            value: mysql:st-{{ .Release.Name }}-rds-cluster
+        image: "534420079206.dkr.ecr.ap-northeast-2.amazonaws.com/01_{{ include "imageAddress" . }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - name: http
+          containerPort: {{ .Values.service.httpPort }}
+          protocol: TCP
+        - name: https
+          containerPort: {{ .Values.service.httpsPort }}
+          protocol: TCP
+        {{- with .Values.volumes }}
+        volumeMounts:
+        {{- if .datadogClient }}
+          {{- toYaml .ddVolumeMounts | nindent 10}}
+        {{- end }}
+        {{- if .iniEnabled }}
+          {{- toYaml .configmapVolumeMounts | nindent 10}}
+        {{- end }}
+        {{- end }}
+        terminationMessagePath: {{ .Values.terminationMessagePath}}
+        terminationMessagePolicy: {{ .Values.terminationMessagePolicy}}
+        readinessProbe:
+          exec:
+            command:
+            - /bin/ls
+            - /dev/shm/supervisor.sock
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          {{- toYaml .Values.resources | nindent 10}}
+      {{- with .Values.initContainers}}
+      initContainers:
+      - image: k8s.gcr.io/git-sync:v3.0.1
+        imagePullPolicy: IfNotPresent
+        name: git-data
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tmp/git
+          name: git-source
+        env:
+        {{- toYaml .env | nindent 10}}
+      {{- end }}
+      {{- with .Values.volumes }}
+      volumes:
+      {{- if .datadogClient }}
+        {{- toYaml .ddVolumes | nindent 8}}
+      {{- end }}
+      {{- if .iniEnabled }}
+        {{- toYaml .configmapVolumes | nindent 8}}
+      {{- end }}
+      {{- end }}
+      dnsPolicy: {{ .Values.dnsPolicy }}
+      restartPolicy: {{  .Values.restartPolicy }}
+      schedulerName: {{  .Values.schedulerName }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds}}
+{{- end}}

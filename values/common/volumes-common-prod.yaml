@@ -1,0 +1,22 @@
+volumes:
+  # datadog APM 설치 서비스 유무
+  datadogClient: false
+  iniEnabled: false
+
+  # datadog APM 설정
+  ddVolumeMounts:
+  - name: apmsocketpath
+    mountPath: /var/run/datadog
+  configmapVolumeMounts:
+  - name: php-ini
+    mountPath: /usr/local/etc/php/php.ini
+    subPath: php.ini
+  ddVolumes:
+  - name: apmsocketpath
+    hostPath:
+      path: /var/run/datadog/
+  configmapVolumes:
+  - name: php-ini
+    configMap:
+      defaultMode: 420
+      name: php-ini

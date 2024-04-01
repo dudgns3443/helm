@@ -1,0 +1,1001 @@
+ingress:
+  enabled: false
+  className: alb
+  annotations:    alb.ingress.kubernetes.io/group.name: conects 
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:534420079206:certificate/cad9de2a-623f-4579-a24b-9f10004c449c,arn:aws:acm:ap-northeast-2:534420079206:certificate/7e400bd2-6ed0-4cb7-af24-fd5bf8115f32,arn:aws:acm:ap-northeast-2:534420079206:certificate/6859da2f-9bee-46c2-8f37-64bfb78a5093,arn:aws:acm:ap-northeast-2:534420079206:certificate/6f46e2f6-a67d-439d-a7ca-416d9d7393fa
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/success-codes: '200,301'
+    alb.ingress.kubernetes.io/target-type: instance
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+ #arn:aws:acm:ap-northeast-2:534420079206:certificate/cad9de2a-623f-4579-a24b-9f10004c449c (*.conects.com)
+  hosts:
+  - host: example-sobang.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: example-sobang
+          port:
+            number: 80
+  - host: sg-tech.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: conects-tech
+          port:
+            number: 80
+  - host: sg-beauty.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: conects-beauty
+          port:
+            number: 80
+  - host: sg-plab.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: conects-plab
+          port:
+            number: 80
+  - host: sg-device.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: conects-device
+          port:
+            number: 80
+  - host: sg-ja.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: conects-ja
+          port:
+            number: 80
+  - host: sg-public.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: conects-public
+          port:
+            number: 80
+  - host: sg-elec.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: conects-elec
+          port:
+            number: 80
+  - host: sg-md.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: conects-md
+          port:
+            number: 80
+  - host: sg-example2-gong.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: example2-gong
+          port:
+            number: 80
+  - host: sg-example3-sobang.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: example3-sobang
+          port:
+            number: 80
+  - host: sg-gongdangi.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: conects-mgong
+          port:
+            number: 80
+  - host: sg-test-nomu.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: conects-nomu
+          port:
+            number: 80
+  - host: sg-test-cdm.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: conects-cdm
+          port:
+            number: 80
+  - host: sg-techdangi.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: conects-mtech
+          port:
+            number: 80
+  - host: sg-sobangdangi.conects.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+          name: conects-msobang
+          port:
+            number: 80     
+  - host: sg-memo.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: conects-memo
+              port:
+                number: 80
+  - host: sg-gong24.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: conects-flap24
+              port:
+                number: 80
+  - host: sg-gyung24.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: flap24-conects
+              port:
+                number: 80
+  - host: sg-peet24.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: flap24-conects
+              port:
+                number: 80
+  - host: sg-plab24.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: flap24-conects
+              port:
+                number: 80
+  - host: sg-skyeduac.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: skyeduacademy-conects
+              port:
+                number: 80
+  - host: sg-nyjskyedu.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: skyeduacademy-conects
+              port:
+                number: 80
+  - host: sg-swskyedu.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: skyeduacademy-conects
+              port:
+                number: 80
+  - host: sg-artskyedu.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: skyeduacademy-conects
+              port:
+                number: 80
+  - host: sg-swdskyedu.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: skyeduacademy-conects
+              port:
+                number: 80
+  - host: sg-nrjskyedu.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: skyeduacademy-conects
+              port:
+                number: 80
+  - host: sg-gdskyedu.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: skyeduacademy-conects
+              port:
+                number: 80
+  - host: sg-pr.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: pr-conects
+              port:
+                number: 80
+  - host: sg-gddskyedu.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: skyeduacademy-conects
+              port:
+                number: 80
+  - host: sg-marine.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: marine-conects
+              port:
+                number: 80
+  - host: sg-note.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: note-conects
+              port:
+                number: 80
+  - host: sg-sobangpro.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: sobangpro-conects
+              port:
+                number: 80
+  - host: sg-gong7.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: gong7-conects
+              port:
+                number: 80
+  - host: sg-cdm.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: cdm-conects
+              port:
+                number: 80
+  - host: sg-plab.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: plab-conects
+              port:
+                number: 80
+  - host: sg-fs.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: fs-conects
+              port:
+                number: 80
+  - host: sg-daechiskyedu.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: conects-skyeduacademy
+              port:
+                number: 80
+            
+#arn:aws:acm:ap-northeast-2:534420079206:certificate/7e400bd2-6ed0-4cb7-af24-fd5bf8115f32 (*.conects.com)
+  - host: sg-baro.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-baro
+          port:
+            number: 80
+  - host: sg-beauty.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: beauty-conects
+              port:
+                number: 80            
+  - host: sg-bupgum.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-bupgum
+          port:
+            number: 80
+  - host: sg-bupmu.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-bupmu
+          port:
+            number: 80
+  - host: sg-china.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-china
+          port:
+            number: 80
+  - host: sg-device.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-device
+          port:
+            number: 80
+  - host: sg-eng.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-eng
+          port:
+            number: 80
+  - host: sg-elec.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: conects-elec
+              port:
+                number: 80
+  - host: sg-gmat.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-gmat
+          port:
+            number: 80
+  - host: sg-gong.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-gong
+          port:
+            number: 80
+  - host: sg-gong-eng.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-gong-eng
+          port:
+            number: 80
+  - host: sg-gongin.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-gongin
+          port:
+            number: 80
+  - host: sg-gyung.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-gyung
+          port:
+            number: 80
+  - host: sg-gyunggan.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-gyunggan
+          port:
+            number: 80
+  - host: sg-gyungpro.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-gyungpro
+          port:
+            number: 80
+  - host: sg-ja.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-ja
+          port:
+            number: 80
+  - host: sg-japan.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-japan
+          port:
+            number: 80
+  - host: sg-md.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: conects-md
+              port:
+                number: 80
+  - host: sg-my.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-my
+          port:
+            number: 80
+  - host: sg-nomu.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-nomu
+          port:
+            number: 80
+  - host: sg-offeng.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-offeng
+          port:
+            number: 80
+  - host: sg-peet.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-peet
+          port:
+            number: 80
+  - host: sg-pro.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-pro
+          port:
+            number: 80
+  - host: sg-skyedu.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-skyedu
+          port:
+            number: 80
+  - host: sg-sobang.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-sobang
+          port:
+            number: 80
+  - host: sg-soridream.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-soridream
+          port:
+            number: 80
+  - host: sg-speaking.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-speaking
+          port:
+            number: 80
+  - host: sg-stem.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-stem
+          port:
+            number: 80
+  - host: sg-protection.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-protection
+          port:
+            number: 80
+  - host: sg-pen.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-pen
+          port:
+            number: 80
+  - host: sg-exam.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-exam
+          port:
+            number: 80
+  - host: sg-hobby.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-hobby
+          port:
+            number: 80
+  - host: sg-lawyer.conects.com
+    paths:
+    - path: /*
+      pathType: ImplementationSpecific
+      backend:
+        service:
+          name: conects-lawyer
+          port:
+            number: 80
+  - host: sg-tech.conects.com
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: conects-tech
+              port:
+                number: 80
+#arn:aws:acm:ap-northeast-2:534420079206:certificate/6859da2f-9bee-46c2-8f37-64bfb78a5093 (*.dangi.co.kr)
+  - host: sg-adm.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-adm
+              port:
+                number: 80
+  - host: sg-adm-tch.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-adm-tch
+              port:
+                number: 80
+  - host: sg-admin-cs.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-admin-cti
+              port:
+                number: 80
+  - host: sg-beauty.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-beauty
+              port:
+                number: 80
+  - host: sg-bupgum.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-bupgum
+              port:
+                number: 80
+  - host: sg-bupmu.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-bupmu
+              port:
+                number: 80
+  - host: sg-china.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-china
+              port:
+                number: 80
+  - host: sg-device.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-device
+              port:
+                number: 80
+  - host: sg-eng.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-eng
+              port:
+                number: 80
+  - host: sg-gmat.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-gmet
+              port:
+                number: 80
+  - host: sg-gong.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-gong
+              port:
+                number: 80
+  - host: sg-gong-eng.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-gong-eng
+              port:
+                number: 80
+  - host: sg-gongin.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-gongin
+              port:
+                number: 80
+  - host: sg-gyung.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-gyung
+              port:
+                number: 80
+  - host: sg-gyunggan.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-gyunggan
+              port:
+                number: 80
+  - host: sg-gyungpro.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-gyungpro
+              port:
+                number: 80
+  - host: sg-ja.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-ja
+              port:
+                number: 80
+  - host: sg-japan.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: dangi-japan
+              port:
+                number: 80
+  - host: sg-mango.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: mango-dangi
+              port:
+                number: 80
+  - host: sg-md.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: md-dangi
+              port:
+                number: 80
+  - host: sg-nomu.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: nomu-dangi
+              port:
+                number: 80
+  - host: sg-offeng.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: offeng-dangi
+              port:
+                number: 80
+  - host: sg-peet.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: peet-dangi
+              port:
+                number: 80
+  - host: sg-pro.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: pro-dangi
+              port:
+                number: 80
+  - host: sg-public.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: public-dangi
+              port:
+                number: 80
+  - host: sg-sobang.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: sobang-dangi
+              port:
+                number: 80
+  - host: sg-protection.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: protection-dangi
+              port:
+                number: 80
+  - host: sg-pen.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: pen-dangi
+              port:
+                number: 80
+  - host: sg-bbs.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: bbs-dangi
+              port:
+                number: 80
+  - host: sg-lapi.dangi.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: lapi-dangi
+              port:
+                number: 80
+#arn:aws:acm:ap-northeast-2:534420079206:certificate/6f46e2f6-a67d-439d-a7ca-416d9d7393fa (*.)
+  - host: sg-off.mbcbeauty.co.kr
+    http:
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: off-mbcbeauty
+              port:
+                number: 80

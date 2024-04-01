@@ -1,0 +1,9 @@
+dependencies:
+- name: aws-load-balancer-controller
+  repository: https://aws.github.io/eks-charts
+  version: 1.6.0
+- name: datadog
+  repository: https://helm.datadoghq.com/
+  version: 3.42.1
+digest: sha256:5ad96f3f9d43c6fbe324ef64c8c19008b818489064824e74e0f8ec758706d4f9
+generated: "2024-02-02T11:11:50.4621402+09:00"

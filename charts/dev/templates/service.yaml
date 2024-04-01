@@ -1,0 +1,17 @@
+{{- if .Values.autoscaling.enabled  | default false}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "01-conects-gong.fullname" . }}
+  labels:
+    {{- include "01-conects-gong.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.httpPort }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "01-conects-gong.selectorLabels" . | nindent 4 }}
+{{- end}}

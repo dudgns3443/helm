@@ -1,0 +1,15 @@
+apiVersion: v2
+name: conects-staging
+description: A Helm chart for Kubernetes
+type: application
+version: 0.1.0
+appVersion: "1.16.0"
+dependencies:
+- name: aws-load-balancer-controller
+  version: 1.6.0
+  repository: https://aws.github.io/eks-charts
+  condition: aws-load-balancer-controller.enabled
+- name: datadog
+  version: 3.42.1
+  repository: https://helm.datadoghq.com/
+  condition: datadog.enabled
