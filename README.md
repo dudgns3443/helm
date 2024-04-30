@@ -90,7 +90,7 @@ services:
 ## helm으로 k8s 리소스 설치 이후 각 서비스 cicd 변경 작업
 
 각 서비스 gitlab 레포에서 테스트용 브랜치 생성
-staging/Dockerfile.staging에 FROM 이미지 534420079206.dkr.ecr.ap-northeast-2.amazonaws.com/pre_source:php7.4-alpine3.16 로 변경
+staging/Dockerfile.staging에 FROM 이미지 pre_source:php7.4-alpine3.16 로 변경
 
 
 Dockerfile에 
@@ -104,7 +104,7 @@ gitlab-ci 수정
 staging 컨테이너의 주소를 바꿨으므로 staging 에서 가져오는 컨테이너 이미지 주소도 바꿔줘야한다
 web-deploment.staging.yaml 수정
 
-        image: 534420079206.dkr.ecr.ap-northeast-2.amazonaws.com/01_conects_[서비스이름]:staging
+        image: /01_conects_[서비스이름]:staging
 
 route53 에서 ingress에서만든 test url과 새로운 클러스터의 ingress 로드밸런서 연결 후 테스트
 ingress에서 test url(gong-test.conects.com) -> 운영 url(gong.conects.com)로 변경 WAF에서 운영 url의 타겟 로드밸런서를 새로만든 클러스터의 로드밸런서로 수정
