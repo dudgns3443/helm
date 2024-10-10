@@ -28,6 +28,16 @@ spec:
       {{- with .Values.nodeSelector }}
       nodeSelector: 
         Service: {{ .service}}
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: Service
+                operator: In
+                values:
+                - {{ .service}}
       {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
