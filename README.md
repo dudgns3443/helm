@@ -13,8 +13,6 @@
 
 ## datadog 배포
 
-dependancy로 추가하려 했지만 현재 실패 그래서 따로 따로 배포해야함
-
 서비스 배포전에 먼저 해주어야 한다. (나중에 해도 되지만 agent먼저 배포하는게 편하다)
 ```
 helm repo add datadog https://helm.datadoghq.com
@@ -30,9 +28,6 @@ helm install datadog-agent -f ./values/common/datadog-values.yaml --set datadog.
 
 1. 공통 리소스 배포
 
-_현재 dependancy들(ingress controller, datadog agent 등)은 미완성이며 옮겨질 클러스터들은 이미 다 provisioning되어있음 ingress만 선택적으로 설치하는 것을 권장_
-
-ingress 첫 배포시에는 host url을 test용 url로 작성하는 것을 권장 예) gong-test.conects.com 등
 configmap이 필요한 클러스터의 경우 configmap.enabled=true 추가
 
 예)
@@ -92,23 +87,10 @@ services:
 각 서비스 gitlab 레포에서 테스트용 브랜치 생성
 staging/Dockerfile.staging에 FROM 이미지 pre_source:php7.4-alpine3.16 로 변경
 
-
 Dockerfile에 
-FROM image 01_conects_[서비스이름]:staging 으로변경
 datadog-php-client 설치 및 환경변수 설정 넣기 (datadog 설치대상 서비스만)
 
 ECR에 01_conects_[서비스이름] 으로 컨테이너 저장소 생성 예) 01_conects_gong 
-
-gitlab-ci 수정
-
-staging 컨테이너의 주소를 바꿨으므로 staging 에서 가져오는 컨테이너 이미지 주소도 바꿔줘야한다
-web-deploment.staging.yaml 수정
-
-        image: /01_conects_[서비스이름]:staging
-
-route53 에서 ingress에서만든 test url과 새로운 클러스터의 ingress 로드밸런서 연결 후 테스트
-ingress에서 test url(gong-test.conects.com) -> 운영 url(gong.conects.com)로 변경 WAF에서 운영 url의 타겟 로드밸런서를 새로만든 클러스터의 로드밸런서로 수정
-staging 및 production 브랜치에 수정사항 merge 및 cherry-pick
 
 ## 클러스터 통합
 
