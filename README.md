@@ -4,23 +4,13 @@
 
 코드를 git이라는 레포로 관리하는 것 처럼 운영도 git으로 공통관리하는 GitOps를 실천하기 위해 도입 및 시작
 
-## ST Unitas 클러스터구조 
+## 클러스터구조 
 
 클러스터 - 공통리소스들(ingress-controller, ingress, agent, configmap, serviceAccount 등) - 여러서비스들(기술단기, 공단기, 노무단기 등)
 으로 구성되어 있다
 
 클러스터당 공통 리소스를 먼저배포 후 각 서비스를 배포해야함
 
-## datadog 배포
-
-서비스 배포전에 먼저 해주어야 한다. (나중에 해도 되지만 agent먼저 배포하는게 편하다)
-```
-helm repo add datadog https://helm.datadoghq.com
-```
-repo등록후
-```
-helm install datadog-agent -f ./values/common/datadog-values.yaml --set datadog.site='datadoghq.com' --set datadog.apiKey={api키} datadog/datadog
-```
 
 ## 배포 명령어
 
